@@ -1,9 +1,3 @@
-def swap(i, j):
-    temp = i
-    i = j
-    j = temp
-
-
 def bubble_sort(nums_array):
     array_length = len(nums_array)
     for i in range(1, array_length):
