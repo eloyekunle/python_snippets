@@ -19,6 +19,18 @@ def insert_into_sequence(number_to_insert, numbers):
             return numbers
 
 
+def insert_into_sequence2(number_to_insert, numbers):
+    numbers.append(number_to_insert)
+    i = 0
+    length = len(numbers)
+    while number_to_insert > numbers[i]:
+        i += 1
+    for j in range(1, length - i):
+        numbers[length - j] = numbers[length - j - 1]
+    numbers[i] = number_to_insert
+    return numbers
+
+
 nums = list(map(int, input("Enter space-separated sequence: ").split()))
 to_insert = int(input("Enter number to insert: "))
-print(insert_into_sequence(to_insert, nums))
+print(insert_into_sequence2(to_insert, nums))
