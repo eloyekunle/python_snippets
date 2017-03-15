@@ -6,9 +6,7 @@ def bubble_sort(nums_array):
         print("\n")
         for j in range(array_length - i):
             if nums_array[j] > nums_array[j+1]:
-                temp = nums_array[j]
-                nums_array[j] = nums_array[j+1]
-                nums_array[j+1] = temp
+                nums_array[j], nums_array[j+1] = nums_array[j+1], nums_array[j]
                 print(i, j, nums_array)
 
 
