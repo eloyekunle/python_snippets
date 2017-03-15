@@ -4,13 +4,13 @@
 
 def first_occurence(numbers):
     largest = numbers[0]
-    length = len(numbers)
     index = 0
+    length = len(numbers)
     for i in range(1, length):
         if numbers[i] > largest:
             largest = numbers[i]
             index = i
-    return (largest, index)
+    return largest, index
 
 
 nums = list(map(int, input("Enter space separated integers: ").split()))
