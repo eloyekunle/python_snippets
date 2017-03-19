@@ -1,3 +1,9 @@
+# The ternary search algorithm locates an element in a list
+# of increasing integers by successively splitting the list into
+# three sublists of equal (or as close to equal as possible)
+# size, and restricting the search to the appropriate piece.
+
+
 def ternary_search(key, numbers):
     i = 0
     j = len(numbers) - 1
