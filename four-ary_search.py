@@ -35,7 +35,7 @@ def fourary_search(key, numbers):
     return location
 
 
-search_list = list(map(int, input("Enter sorted numbers, separated by space: ").split(", ")))
+search_list = list(map(int, input("Enter sorted numbers, separated by space: ").split()))
 search_key = int(input("Enter number to search for: "))
 index = fourary_search(search_key, search_list)
 message = "Index = " + str(index) if index >= 0 else "Item not found"

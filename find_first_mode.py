@@ -45,10 +45,6 @@ def find_mode2(numbers):
     return mode
 
 
-nums = list(map(int, input("Enter space-separated integers: ").split(", ")))
+nums = list(map(int, input("Enter space-separated integers: ").split()))
 the_mode = find_mode2(nums)
-if the_mode is None:
-    message = "No mode found"
-else:
-    message = "The mode is " + str(the_mode)
-print(message)
+print("The mode is", the_mode)
