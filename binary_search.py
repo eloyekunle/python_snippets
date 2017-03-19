@@ -3,7 +3,8 @@ def binary_search(search_key, search_list):
     j = len(search_list) - 1
 
     while i < j:
-        middle_element = (i + j) // 2
+        # For binary divisions, this is the same thing as middle_element = (i + j) // 2
+        middle_element = i + (j - i) // 2
         if search_key > search_list[middle_element]:
             i = middle_element + 1
             print(search_list[i:j+1])
