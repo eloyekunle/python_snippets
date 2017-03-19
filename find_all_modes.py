@@ -23,6 +23,6 @@ def find_modes(numbers):
     return modes
 
 
-nums = list(map(int, input("Enter space-separated integers: ").split(", ")))
+nums = list(map(int, input("Enter space-separated integers: ").split()))
 the_mode = find_modes(nums)
-print(the_mode)
+print("The modes are:", the_mode)
