@@ -10,6 +10,7 @@ def bubble_sort(nums_array):
                 print(i, j, nums_array)
 
 
+# The smart bubble sort quits if no swaps were made in the last pass. This means that the sequence is sorted already.
 def smart_bubble_sort(nums_array):
     length = len(nums_array)
     swap = True
