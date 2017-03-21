@@ -1,3 +1,4 @@
+# Naiive insertion sort
 def insertion_sort(nums_array):
     for i in range(1, len(nums_array)):
         # print(nums_array)
@@ -17,6 +18,8 @@ def insertion_sort(nums_array):
     print(nums_array)
 
 
+# a variation of the insertion sort that uses a linear search technique that inserts the j th element in the
+# correct place by first comparing it with the (j − 1)st element, then the (j − 2)th element if necessary, and so on.
 def smart_insertion_sort(nums_array):
     for i in range(1, len(nums_array)):
         key = nums_array[i]
@@ -31,6 +34,7 @@ def smart_insertion_sort(nums_array):
 
         nums_array[j] = key
         print(nums_array)
+
 
 nums = list(map(int, input("Enter numbers, separated by space: ").split()))
 # with open('/home/playmice/MyCode/Python/python_snippets/data/8Kints.txt') as f:
