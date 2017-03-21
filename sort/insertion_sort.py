@@ -16,8 +16,24 @@ def insertion_sort(nums_array):
 
     print(nums_array)
 
+
+def smart_insertion_sort(nums_array):
+    for i in range(1, len(nums_array)):
+        key = nums_array[i]
+        j = i
+        while j > 0 and nums_array[j - 1] > key:
+            j -= 1
+
+        print("\n", nums_array[i], "will be inserted at", j)
+
+        for k in range(i - j):
+            nums_array[i - k] = nums_array[i - k - 1]
+
+        nums_array[j] = key
+        print(nums_array)
+
 nums = list(map(int, input("Enter numbers, separated by space: ").split()))
 # with open('/home/playmice/MyCode/Python/python_snippets/data/8Kints.txt') as f:
 #     nums = [int(i) for i in f]
 
-insertion_sort(nums)
+smart_insertion_sort(nums)
