@@ -1,4 +1,9 @@
 def solution(A):
+    """
+    Problem: http://codility.com/demo/take-sample-test/perm_missing_elem
+    :param A:
+    :return:
+    """
     left = A[0]
     right = sum(A) - left
 
