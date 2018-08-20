@@ -1,9 +1,7 @@
-"""
-Problem statement: https://app.codility.com/programmers/lessons/12-euclidean_algorithm/chocolates_by_numbers
-"""
-
-
 def solution(N, M):
+    """
+    Problem statement: https://app.codility.com/programmers/lessons/12-euclidean_algorithm/chocolates_by_numbers
+    """
     gcd = euclidean_algorithm(N, M)
     sol = 0
 

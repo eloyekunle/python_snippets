@@ -1,9 +1,7 @@
-"""
-Problem Statement: https://app.codility.com/programmers/lessons/1-iterations/binary_gap
-"""
-
-
 def solution(N):
+    """
+    Problem Statement: https://app.codility.com/programmers/lessons/1-iterations/binary_gap
+    """
     binary_rep = format(N, 'b')
     longest_length = 0
     i = 0

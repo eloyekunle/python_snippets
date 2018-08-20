@@ -1,9 +1,7 @@
-"""
-Problem statement: https://app.codility.com/programmers/lessons/2-arrays/cyclic_rotation
-"""
-
-
 def solution(A, K):
+    """
+    Problem statement: https://app.codility.com/programmers/lessons/2-arrays/cyclic_rotation
+    """
     len_a = len(A)
     if len_a:
         i = len_a - (K % len_a)

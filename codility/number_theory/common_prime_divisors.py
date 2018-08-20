@@ -1,15 +1,13 @@
-"""
-Problem Statement: https://app.codility.com/programmers/lessons/12-euclidean_algorithm/common_prime_divisors
-
-Pretty much copied from after ~2hrs with no progress:
- https://codesays.com/2014/solution-to-common-prime-divisors-by-codility/
-"""
-
-
 from math import gcd
 
 
 def solution(A, B):
+    """
+    Problem Statement: https://app.codility.com/programmers/lessons/12-euclidean_algorithm/common_prime_divisors
+
+    Pretty much copied from after ~2hrs with no progress:
+     https://codesays.com/2014/solution-to-common-prime-divisors-by-codility/
+    """
     count = 0
     for j, k in zip(A, B):
         if calc_div(j, k):
