@@ -53,14 +53,18 @@ def calc_distance(v1, v2):
     parents_1 = set()
     parent_1 = v1_node.data
     while parent_1 is not None:
-        parents_1.add(inserted[parent_1])
-        parent_1 = inserted[parent_1].parent
+        inserted_parent_1 = inserted[parent_1]
+        distances[v1][parent_1] = distances[parent_1][v1] = v1_node.level - inserted_parent_1.level
+        parents_1.add(inserted_parent_1)
+        parent_1 = inserted_parent_1.parent
 
     parents_2 = set()
     parent_2 = v2_node.data
     while parent_2 is not None:
-        parents_2.add(inserted[parent_2])
-        parent_2 = inserted[parent_2].parent
+        inserted_parent_2 = inserted[parent_2]
+        distances[v2][parent_2] = distances[parent_2][v2] = v2_node.level - inserted_parent_2.level
+        parents_2.add(inserted_parent_2)
+        parent_2 = inserted_parent_2.parent
 
     len_common_parents = len(parents_1 & parents_2)
     distance = (v1_node.level - len_common_parents) + (v2_node.level - len_common_parents)
@@ -86,7 +90,7 @@ if __name__ == '__main__':
     for i in range(q):
         _ = input()
         k_set = set(map(int, input().split()))
-        print(kittyCalc(k_set))
+        print(i, kittyCalc(k_set))
 
 # if __name__ == '__main__':
 #     nodes = [[1,2], [3,1], [4,1], [3,5], [3,6], [3,7]]
