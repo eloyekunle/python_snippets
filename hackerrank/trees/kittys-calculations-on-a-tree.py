@@ -1,6 +1,8 @@
 from itertools import combinations
+from collections import defaultdict
+
 def get_pairs_from_set(node_set):
-    return list(combinations(node_set, 2))
+    return list(combinations(sorted(node_set), 2))
 
 class Tree:
     def __init__(self):
@@ -43,6 +45,11 @@ def calc_distance(v1, v2):
     v1_node = inserted[v1]
     v2_node = inserted[v2]
 
+    if distances[v1][v2]:
+        return distances[v1][v2]
+    elif distances[v2][v1]:
+        return distances[v2][v1]
+
     parents_1 = set()
     parent_1 = v1_node.data
     while parent_1 is not None:
@@ -56,11 +63,12 @@ def calc_distance(v1, v2):
         parent_2 = inserted[parent_2].parent
 
     len_common_parents = len(parents_1 & parents_2)
-    return (v1_node.level - len_common_parents) + (v2_node.level - len_common_parents)
+    distance = (v1_node.level - len_common_parents) + (v2_node.level - len_common_parents)
+    distances[v1][v2] = distances[v2][v1] = distance
+    return distance
 
 def kittyCalc(set_pairs):
     pairs = get_pairs_from_set(set_pairs)
-    print(pairs)
     kitty = 0
     for n,m in pairs:
         kitty += (n*m*calc_distance(n,m))
@@ -74,18 +82,20 @@ if __name__ == '__main__':
         pair = list(map(int, input().split()))
         t.create(*pair)
     inserted = t.inserted
+    distances = defaultdict(lambda: defaultdict(int))
     for i in range(q):
         _ = input()
         k_set = set(map(int, input().split()))
-        print(i, kittyCalc(k_set))
-#
+        print(kittyCalc(k_set))
+
 # if __name__ == '__main__':
 #     nodes = [[1,2], [3,1], [4,1], [3,5], [3,6], [3,7]]
 #     t = Tree()
 #     for x,y in nodes:
 #         t.create(x,y)
 #     inserted = t.inserted
-#     assert kittyCalc(t.root, {2,4}) == 16
-#     assert kittyCalc(t.root, {2,1}) == 2
-#     assert kittyCalc(t.root, {5}) == 0
-#     assert kittyCalc(t.root, {2,4,5}) == 106
+#     distances = defaultdict(dict)
+#     assert kittyCalc({2,4}) == 16
+#     assert kittyCalc({2,1}) == 2
+#     assert kittyCalc({5}) == 0
+#     assert kittyCalc({2,4,5}) == 106
