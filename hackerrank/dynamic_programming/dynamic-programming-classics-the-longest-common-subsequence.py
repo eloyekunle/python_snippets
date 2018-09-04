@@ -21,8 +21,8 @@ def constructLCS(c, a, b, i, j, w):
     if c[i][j] == 0:
         return
     if a[i-1] == b[j-1]:
-        w.append(a[i-1])
         constructLCS(c, a, b, i-1, j-1, w)
+        w.append(a[i-1])
     elif c[i][j-1] > c[i-1][j]:
         constructLCS(c, a, b, i, j-1, w)
     else:
