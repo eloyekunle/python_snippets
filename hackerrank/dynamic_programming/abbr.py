@@ -1,6 +1,10 @@
-#!/bin/python3
-
 def abbreviation(a, b):
+    """
+    Problem: https://www.hackerrank.com/challenges/abbr/problem
+    :param a:
+    :param b:
+    :return:
+    """
     len_a = len(a)
     len_b = len(b)
     s = [[False] * (len_a + 1) for _ in range(len_b + 1)]
@@ -12,7 +16,7 @@ def abbreviation(a, b):
 
     for i in range(1, len_b + 1):
         c_b = b[i-1]
-        for j in range(1, len_a + 1):
+        for j in range(i, len_a + 1):
             c_a = a[j-1]
             if c_a.isupper():
                 if c_a == c_b:
