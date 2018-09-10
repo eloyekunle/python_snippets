@@ -2,12 +2,11 @@
 
 class Graph:
     class Edge:
-        __slots__ = '_origin', '_destination', '_element'
+        __slots__ = '_origin', '_destination'
 
-        def __init__(self, u, v, x):
+        def __init__(self, u, v):
             self._origin = u
             self._destination = v
-            self._element = x
 
         def endpoints(self):
             return self._origin, self._destination
@@ -15,14 +14,11 @@ class Graph:
         def opposite(self, v):
             return self._destination if v is self._origin else self._origin
 
-        def element(self):
-            return self._element
-
         def __hash__(self):  # will allow edge to be a map/set key
             return hash((self._origin, self._destination))
 
         def __str__(self):
-            return '({0},{1},{2})'.format(self._origin, self._destination, self._element)
+            return '({0},{1})'.format(self._origin, self._destination)
 
     def __init__(self):
         self._outgoing = {}
@@ -66,19 +62,23 @@ class Graph:
     def insert_vertex(self, x=None):
         self._outgoing[x] = {}
 
-    def insert_edge(self, u, v, x=None):
+    def insert_edge(self, u, v):
         if self.get_edge(u, v) is not None:  # includes error checking
             raise ValueError('u and v are already adjacent')
-        e = self.Edge(u, v, x)
+        e = self.Edge(u, v)
         self._outgoing[u][v] = e
 
 
-def dfs(g : Graph, u, discovered):
+def dfs(g : Graph, u, discovered, cur_vertices=None):
+    if cur_vertices is None:
+        cur_vertices = set()
+
     for e in g.incident_edges(u):
         v = e.opposite(u)
-        if v not in discovered:
-            discovered[u] = e
-            dfs(g, v, discovered)
+        if (v not in discovered or discovered[v] is None) and v not in cur_vertices:
+            cur_vertices.add(v)
+            discovered[v] = e
+            dfs(g, v, discovered, cur_vertices)
 
 def dfs_complete(g : Graph):
     forest = {}
@@ -90,17 +90,24 @@ def dfs_complete(g : Graph):
 
 # Complete the roadsAndLibraries function below.
 def roadsAndLibraries(n, c_lib, c_road, cities):
+    if c_lib < c_road:
+        return c_lib * n
     v = dfs_complete(cities)
-    return v
+    collections = sum(value is None for value in v.values())
+    if collections == 0:
+        collections = 1
+    cost = collections * c_lib + (len(v) - collections) * c_road
+
+    return cost
 
 
 if __name__ == '__main__':
     fptr = open('../../data/torque-and-development-001.txt')
 
     q = int(fptr.readline())
-    graph = Graph()
 
     for q_itr in range(q):
+        graph = Graph()
         nmC_libC_road = fptr.readline().split()
 
         n = int(nmC_libC_road[0])
@@ -111,12 +118,12 @@ if __name__ == '__main__':
 
         c_road = int(nmC_libC_road[3])
 
-        for i in range(n):
+        for i in range(1, n + 1):
             graph.insert_vertex(i)
 
         for _ in range(m):
             cities = list(map(int, fptr.readline().rstrip().split()))
-            graph.insert_edge(cities[0] - 1, cities[1] - 1)
+            graph.insert_edge(cities[0], cities[1])
 
         result = roadsAndLibraries(n, c_lib, c_road, graph)
 
