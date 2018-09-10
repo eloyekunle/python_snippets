@@ -67,42 +67,39 @@ class Graph:
             raise ValueError('u and v are already adjacent')
         e = self.Edge(u, v)
         self._outgoing[u][v] = e
+        self._outgoing[v][u] = e
 
 
 def dfs(g : Graph, u, discovered, cur_vertices=None):
     if cur_vertices is None:
         cur_vertices = set()
 
+    cur_vertices.add(u)
     for e in g.incident_edges(u):
         v = e.opposite(u)
-        if (v not in discovered or discovered[v] is None) and v not in cur_vertices:
-            cur_vertices.add(v)
+        if v not in discovered and v not in cur_vertices:
             discovered[v] = e
             dfs(g, v, discovered, cur_vertices)
 
-def dfs_complete(g : Graph):
-    forest = {}
-    for u in g.vertices():
-        if u not in forest:
-            forest[u] = None
-            dfs(g, u, forest)
-    return forest
+    return len(cur_vertices)
 
 # Complete the roadsAndLibraries function below.
 def roadsAndLibraries(n, c_lib, c_road, cities):
     if c_lib < c_road:
         return c_lib * n
-    v = dfs_complete(cities)
-    collections = sum(value is None for value in v.values())
-    if collections == 0:
-        collections = 1
-    cost = collections * c_lib + (len(v) - collections) * c_road
-
+    forest = {}
+    cost = 0
+    for u in cities.vertices():
+        if u not in forest:
+            forest[u] = None
+            cluster = dfs(cities, u, forest)
+            if cluster:
+                cost += (cluster - 1) * c_road + c_lib
     return cost
 
 
 if __name__ == '__main__':
-    fptr = open('../../data/torque-and-development-001.txt')
+    fptr = open('../../data/torque-and-development-002.txt')
 
     q = int(fptr.readline())
 
