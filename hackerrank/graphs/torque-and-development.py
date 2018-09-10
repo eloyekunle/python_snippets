@@ -27,31 +27,13 @@ class Graph:
         if v not in self._outgoing:
             raise ValueError('Vertex does not belong to this graph.')
 
-    def vertex_count(self):
-        return len(self._outgoing)
-
     def vertices(self):
         return self._outgoing.keys()
-
-    def edge_count(self):
-        total = sum(len(self._outgoing[v]) for v in self._outgoing)
-        return total // 2
-
-    def edges(self):
-        result = set()  # avoid double-reporting edges of undirected graph
-        for secondary_map in self._outgoing.values():
-            result.update(secondary_map.values())  # add edges to resulting set
-        return result
 
     def get_edge(self, u, v):
         self._validate_vertex(u)
         self._validate_vertex(v)
         return self._outgoing[u].get(v)  # returns None if v not adjacent
-
-    def degree(self, v):
-        self._validate_vertex(v)
-        adj = self._outgoing
-        return len(adj[v])
 
     def incident_edges(self, v):
         self._validate_vertex(v)
@@ -77,7 +59,7 @@ def dfs(g : Graph, u, discovered, cur_vertices=None):
     cur_vertices.add(u)
     for e in g.incident_edges(u):
         v = e.opposite(u)
-        if v not in discovered and v not in cur_vertices:
+        if v not in cur_vertices:
             discovered[v] = e
             dfs(g, v, discovered, cur_vertices)
 
@@ -92,14 +74,13 @@ def roadsAndLibraries(n, c_lib, c_road, cities):
     for u in cities.vertices():
         if u not in forest:
             forest[u] = None
-            cluster = dfs(cities, u, forest)
-            if cluster:
-                cost += (cluster - 1) * c_road + c_lib
+            cluster = dfs(cities, u, forest) - 1
+            cost += cluster * c_road + c_lib
     return cost
 
 
 if __name__ == '__main__':
-    fptr = open('../../data/torque-and-development-002.txt')
+    fptr = open('/home/elijah/Downloads/input05.txt')
 
     q = int(fptr.readline())
 
