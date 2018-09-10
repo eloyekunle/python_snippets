@@ -5,7 +5,7 @@ class Stack:
         return len(self._items)
     def push(self, x):
         self._items.append(x)
-    def pop(self, x):
+    def pop(self):
         if self.is_empty():
             raise IndexError('Stack is empty.')
         return self._items.pop()
