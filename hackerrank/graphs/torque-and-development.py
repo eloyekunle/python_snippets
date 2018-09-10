@@ -12,7 +12,7 @@ class Graph:
             return self._origin, self._destination
 
         def opposite(self, v):
-            return self._destination if v is self._origin else self._origin
+            return self._destination if v == self._origin else self._origin
 
         def __hash__(self):  # will allow edge to be a map/set key
             return hash((self._origin, self._destination))
@@ -75,7 +75,8 @@ def roadsAndLibraries(n, c_lib, c_road, cities):
         if u not in forest:
             forest[u] = None
             cluster = dfs(cities, u, forest) - 1
-            cost += cluster * c_road + c_lib
+            cost += (cluster * c_road) + c_lib
+            # print(cost)
     return cost
 
 
