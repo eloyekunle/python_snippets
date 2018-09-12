@@ -14,4 +14,4 @@ class Stack:
             raise IndexError('Stack is empty.')
         return self._items[-1]
     def is_empty(self):
-        return len(self._items) == 0
+        return len(self) == 0

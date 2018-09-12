@@ -14,7 +14,7 @@ class Stack:
             raise IndexError('Stack is empty.')
         return self._items[-1]
     def is_empty(self):
-        return len(self._items) == 0
+        return len(self) == 0
 
 class Queue:
     def __init__(self):
@@ -36,7 +36,7 @@ class Queue:
         return self._output_stack.top()
 
     def is_empty(self):
-        return (len(self._input_stack) + len(self._output_stack)) == 0
+        return len(self) == 0
 
     def _validate_output_stack(self):
         if self._output_stack.is_empty():
