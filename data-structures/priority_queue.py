@@ -30,7 +30,7 @@ class HeapPriorityQueue(PriorityQueueBase):
 
     def _upheap(self, j):
         parent = self._parent(j)
-        while self._data[j] > self._data[parent]:
+        if j > 0 and self._data[j] < self._data[parent]:
             self._swap(j, parent)
             self._upheap(parent)
 
@@ -75,7 +75,6 @@ class HeapPriorityQueue(PriorityQueueBase):
         item = self._Item(key, value)
         self._data.append(item)
         self._upheap(len(self) - 1)
-
 
 class AdaptableHeapPriorityQueue(HeapPriorityQueue):
     class Locator(HeapPriorityQueue._Item):
