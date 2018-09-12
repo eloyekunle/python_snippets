@@ -49,6 +49,8 @@ class HeapPriorityQueue(PriorityQueueBase):
     def _swap(self, n, m):
         self._data[n], self._data[m] = self._data[m], self._data[n]
 
+    __slots__ = '_data'
+
     def __init__(self):
         self._data = []
 
@@ -56,10 +58,14 @@ class HeapPriorityQueue(PriorityQueueBase):
         return len(self._data)
 
     def min(self):
+        if self.is_empty():
+            raise IndexError('PQ is empty.')
         min_val = self._data[0]
         return min_val._key, min_val._value
 
     def remove_min(self):
+        if self.is_empty():
+            raise IndexError('PQ is empty.')
         self._swap(0, len(self) - 1)
         item = self._data.pop()
         self._downheap(0)
