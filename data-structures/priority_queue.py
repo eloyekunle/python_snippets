@@ -29,8 +29,22 @@ class HeapPriorityQueue(PriorityQueueBase):
         return (j - 1) // 2
 
     def _upheap(self, j):
+        parent = self._parent(j)
+        while self._data[j] > self._data[parent]:
+            self._swap(j, parent)
+            self._upheap(parent)
 
     def _downheap(self, j):
+        if self._has_left(j):
+            left = self._left(j)
+            small_child = left
+            if self._has_right(j):
+                right = self._right(j)
+                if self._data[right] < self._data[left]:
+                    small_child = right
+            if self._data[j] > self._data[small_child]:
+                self._swap(j, small_child)
+                self._downheap(small_child)
 
     def _swap(self, n, m):
         self._data[n], self._data[m] = self._data[m], self._data[n]
@@ -46,8 +60,15 @@ class HeapPriorityQueue(PriorityQueueBase):
         return min_val._key, min_val._value
 
     def remove_min(self):
+        self._swap(0, len(self) - 1)
+        item = self._data.pop()
+        self._downheap(0)
+        return item._key, item._value
 
     def add(self, key, value):
+        item = self._Item(key, value)
+        self._data.append(item)
+        self._upheap(len(self) - 1)
 
 
 class AdaptableHeapPriorityQueue(HeapPriorityQueue):
