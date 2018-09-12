@@ -30,7 +30,7 @@ class HeapPriorityQueue(PriorityQueueBase):
 
     def _upheap(self, j):
         parent = self._parent(j)
-        while self._data[j] > self._data[parent]:
+        if j > 0 and self._data[j] < self._data[parent]:
             self._swap(j, parent)
             self._upheap(parent)
 
@@ -76,6 +76,47 @@ class HeapPriorityQueue(PriorityQueueBase):
         self._data.append(item)
         self._upheap(len(self) - 1)
 
-
 class AdaptableHeapPriorityQueue(HeapPriorityQueue):
-    pass
+    class Locator(HeapPriorityQueue._Item):
+        __slots__ = '_index'
+
+        def __init__(self, k, v, j):
+            super().__init__(k, v)
+            self._index = j
+
+    def _swap(self, n, m):
+        super()._swap(n, m)
+        self._data[n]._index = n
+        self._data[m]._index = m
+
+    def _bubble(self, j):
+        if j > 0 and self._data[j] < self._data[self._parent(j)]:
+            self._upheap(j)
+        else:
+            self._downheap(j)
+
+    def add(self, key, value):
+        token = self.Locator(key, value, len(self._data))
+        self._data.append(token)
+        self._upheap(len(self._data) - 1)
+        return token
+
+    def update(self, loc : Locator, newkey, newvalue):
+        j = loc._index
+        if not (0 <= j < len(self) and self._data[j] == loc):
+            raise ValueError('Invalid Locator')
+        self._data[j]._key = newkey
+        self._data[j]._value = newvalue
+        self._bubble(j)
+
+    def remove(self, loc : Locator):
+        j = loc._index
+        if not (0 <= j < len(self) and self._data[j] == loc):
+            raise ValueError('Invalid Locator')
+        if j == len(self) - 1:
+            self._data.pop()
+        else:
+            self._swap(j, len(self) - 1)
+            self._data.pop()
+            self._bubble(j)
+        return loc._key, loc._value
