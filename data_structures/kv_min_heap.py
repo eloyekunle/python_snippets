@@ -1,4 +1,4 @@
-class PriorityQueueBase:
+class HeapPriorityQueue:
     class _Item:
         __slots__ = '_key', '_value'
 
@@ -9,10 +9,6 @@ class PriorityQueueBase:
         def __lt__(self, other):
             return self._key < other._key
 
-    def is_empty(self):
-        return len(self) == 0
-
-class HeapPriorityQueue(PriorityQueueBase):
     def _left(self, j):
         return 2*j + 1
 
@@ -56,6 +52,9 @@ class HeapPriorityQueue(PriorityQueueBase):
 
     def __len__(self):
         return len(self._data)
+
+    def is_empty(self):
+        return len(self) == 0
 
     def min(self):
         if self.is_empty():
