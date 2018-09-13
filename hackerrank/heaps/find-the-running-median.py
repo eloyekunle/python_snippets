@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 
 import os
 import sys
@@ -15,7 +15,7 @@ def runningMedian(a):
         else:
             max_heap.add(num)
 
-        while abs(len(min_heap) - len(max_heap)) > 1:
+        while not -1 <= (len(min_heap) - len(max_heap)) <= 1:
             if len(min_heap) > len(max_heap):
                 max_heap.add(min_heap.remove_top())
             else:
@@ -28,6 +28,18 @@ def runningMedian(a):
         else:
             median = max_heap.top()
 
+        medians.append(median)
+    return medians
+
+def runningMedianNaive(a):
+    medians = []
+    for i in range(1, len(a) + 1):
+        array = a[:i]
+        array.sort()
+        if i % 2 == 0:
+            median = (array[(i // 2) - 1] + array[i // 2]) / 2
+        else:
+            median = array[i // 2]
         medians.append(median)
     return medians
 

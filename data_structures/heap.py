@@ -55,6 +55,8 @@ class HeapPriorityQueueBase:
             self._swap(j, len(self) - 1)
             self._data.pop()
             self._bubble(j)
+        if not self._kv:
+            return loc._key
         return loc._key, loc._value
 
     def update(self, loc : Locator, newkey, newvalue=None):
@@ -71,10 +73,13 @@ class HeapPriorityQueueBase:
         self._bubble(len(self._data) - 1)
         return token
 
-    def top(self):
+    def top_loc(self):
         if self.is_empty():
             raise IndexError('PQ is empty.')
-        val = self._data[0]
+        return self._data[0]
+
+    def top(self):
+        val = self.top_loc()
         if not self._kv:
             return val._key
         return val._key, val._value
