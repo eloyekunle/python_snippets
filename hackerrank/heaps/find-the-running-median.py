@@ -44,9 +44,9 @@ def runningMedianNaive(a):
     return medians
 
 if __name__ == '__main__':
-    f = open('../../data/find-the-running-median-001.txt')
+    f = open('../data/find-the-running-median-001.txt')
     a_count = int(f.readline())
-    s = open('../../data/find-the-running-median-001.sol.txt').readlines()
+    s = open('../data/find-the-running-median-001.sol.txt').readlines()
     a = []
 
     for _ in range(a_count):

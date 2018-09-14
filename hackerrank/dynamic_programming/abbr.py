@@ -32,7 +32,7 @@ def abbreviation(a, b):
 if __name__ == '__main__':
     f = open('/home/elijah/MyCode/python_snippets/data/abbr-003.txt')
     q = int(f.readline())
-    results = open('../../data/abbr-003.sol.txt').readlines()
+    results = open('../data/abbr-003.sol.txt').readlines()
 
     for q_itr in range(q):
         a = f.readline().rstrip()

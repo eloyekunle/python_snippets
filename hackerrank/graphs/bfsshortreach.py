@@ -29,8 +29,8 @@ def bfs(n, m, g, s):
     return output
 
 if __name__ == '__main__':
-    f = open('../../data/bfsshortreach-001.txt')
-    sol = [list(map(int, y.rstrip().split())) for y in open('../../data/bfsshortreach-001.sol.txt').readlines()]
+    f = open('../data/bfsshortreach-001.txt')
+    sol = [list(map(int, y.rstrip().split())) for y in open('../data/bfsshortreach-001.sol.txt').readlines()]
 
     q = int(f.readline())
 
@@ -43,7 +43,7 @@ if __name__ == '__main__':
         m = int(nm[1])
 
         for i in range(n):
-            g.insert_vertex_simple(i + 1)
+            g.insert_vertex(i + 1)
 
         for _ in range(m):
             edges = list(map(int, f.readline().rstrip().split()))

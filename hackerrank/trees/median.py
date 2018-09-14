@@ -62,7 +62,7 @@ def calc_median(a, x):
             else:
                 print('Wrong!')
 
-f = open('../../data/median-002.txt')
+f = open('../data/median-002.txt')
 N = int(f.readline())
 s = []
 x = []

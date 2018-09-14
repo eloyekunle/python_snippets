@@ -5,7 +5,7 @@ class Graph:
         def __init__(self, u, v, x):
             self._origin = u
             self._destination = v
-            self._element = x
+            self._element = x   # sometimes acts as my weight
 
         def endpoints(self):
             return self._origin, self._destination
@@ -18,9 +18,6 @@ class Graph:
 
         def __hash__(self):  # will allow edge to be a map/set key
             return hash((self._origin, self._destination))
-
-        def __str__(self):
-            return '({0},{1},{2})'.format(self._origin, self._destination, self._element)
 
     def __init__(self, directed=False):
         self._outgoing = {}
@@ -65,7 +62,7 @@ class Graph:
         for edge in adj[v].values():
             yield edge
 
-    def insert_vertex_simple(self, v=None):
+    def insert_vertex(self, v=None):
         self._outgoing[v] = {}
         if self.is_directed():
             self._incoming[v] = {}  # need distinct map for incoming edges

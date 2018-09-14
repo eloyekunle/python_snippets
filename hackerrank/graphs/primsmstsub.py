@@ -97,7 +97,7 @@ def prims(n, edges, start):
     return sum(edge.element() for edge in tree)
 
 if __name__ == '__main__':
-    f = open('../../data/primsmstsub-002.txt')
+    f = open('../data/primsmstsub-002.txt')
 
     nm = f.readline().split()
 
