@@ -64,7 +64,8 @@ class HeapPriorityQueueBase:
         if not (0 <= j < len(self) and self._data[j] == loc):
             raise ValueError('Invalid Locator')
         self._data[j]._key = newkey
-        self._data[j]._value = newvalue
+        if newvalue is not None:
+            self._data[j]._value = newvalue
         self._bubble(j)
 
     def add(self, key, value=None):

@@ -5,7 +5,7 @@ class Graph:
         def __init__(self, u, v, x):
             self._origin = u
             self._destination = v
-            self._element = x   # sometimes acts as my weight
+            self._element = x   # sometimes acts as weight for weighted graphs
 
         def endpoints(self):
             return self._origin, self._destination
@@ -22,10 +22,6 @@ class Graph:
     def __init__(self, directed=False):
         self._outgoing = {}
         self._incoming = {} if directed else self._outgoing
-
-    def _validate_vertex(self, v):
-        if v not in self._outgoing:
-            raise ValueError('Vertex does not belong to this graph.')
 
     def is_directed(self):
         return self._incoming is not self._outgoing  # directed if maps are distinct
@@ -47,17 +43,13 @@ class Graph:
         return result
 
     def get_edge(self, u, v):
-        self._validate_vertex(u)
-        self._validate_vertex(v)
-        return self._outgoing[u].get(v)  # returns None if v not adjacent
+        return self._outgoing[u].get(v)
 
     def degree(self, v, outgoing=True):
-        self._validate_vertex(v)
         adj = self._outgoing if outgoing else self._incoming
         return len(adj[v])
 
     def incident_edges(self, v, outgoing=True):
-        self._validate_vertex(v)
         adj = self._outgoing if outgoing else self._incoming
         for edge in adj[v].values():
             yield edge
@@ -69,7 +61,8 @@ class Graph:
         return v
 
     def insert_edge(self, u, v, x=None):
-        if self.get_edge(u, v) is not None:  # includes error checking
+        edge = self.get_edge(u, v)
+        if edge is not None and edge.element() < x:  # includes error checking
             return
         e = self.Edge(u, v, x)
         self._outgoing[u][v] = e
