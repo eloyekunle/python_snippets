@@ -1,3 +1,4 @@
+from typing import Set
 class Graph:
     class Edge:
         __slots__ = '_origin', '_destination', '_element'
@@ -8,7 +9,7 @@ class Graph:
             self._element = x   # sometimes acts as weight for weighted graphs
 
         def endpoints(self):
-            return self._origin, self._destination
+            return self._origin, self._destination  # Order matters yo!
 
         def opposite(self, v):
             return self._destination if v == self._origin else self._origin
@@ -36,7 +37,7 @@ class Graph:
         total = sum(len(self._outgoing[v]) for v in self._outgoing)
         return total if self.is_directed() else total // 2
 
-    def edges(self, outgoing=True):
+    def edges(self, outgoing=True) -> Set[Edge]:
         result = set()  # avoid double-reporting edges of undirected graph
         adj = self._outgoing if outgoing else self._incoming
         for secondary_map in adj.values():
