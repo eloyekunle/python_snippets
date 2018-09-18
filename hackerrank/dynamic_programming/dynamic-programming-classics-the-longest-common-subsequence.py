@@ -5,12 +5,10 @@ def longestCommonSubsequence(a, b):
     len_a = len(a)
     len_b = len(b)
     c = defaultdict(lambda: defaultdict(int))
-    w = []
     for i in range(1, len_a + 1):
         for j in range(1, len_b + 1):
             if a[i-1] == b[j-1]:
                 val = c[i-1][j-1] + 1
-                w.append(a[i-1])
             else:
                 val = max(c[i-1][j], c[i][j-1])
             c[i][j] = val
