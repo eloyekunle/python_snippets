@@ -36,9 +36,10 @@ class Graph:
         total = sum(len(self._outgoing[v]) for v in self._outgoing)
         return total if self.is_directed() else total // 2
 
-    def edges(self):
+    def edges(self, outgoing=True):
         result = set()  # avoid double-reporting edges of undirected graph
-        for secondary_map in self._outgoing.values():
+        adj = self._outgoing if outgoing else self._incoming
+        for secondary_map in adj.values():
             result.update(secondary_map.values())  # add edges to resulting set
         return result
 
