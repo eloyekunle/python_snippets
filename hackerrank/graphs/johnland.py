@@ -1,33 +1,70 @@
 import os
 import sys
 import math
+from collections import defaultdict
+from data_structures.heap import MinHeapPriorityQueue
+from data_structures.graph_no_vertice_object import Graph
 
-def floyd_warshall(m):
-    # print(m)
-    n = len(m)
-    d_matrices = {0: m}
+def roadsInHackerland(n, edges, start=1):
+    def dfs(u):
+        total = 1
 
-    for k in range(n):
-        m_cur = d_matrices[k+1] = [[] for _ in range(n)]
-        m_prev = d_matrices[k]
-        for i in range(n):
-            for j in range(n):
-                # print(k,i,j)
-                m_cur[i].append(min(m_prev[i][j], m_prev[i][k] + m_prev[k][j]))
+        if u in tree:
+            for edge in tree[u]:
+                v = edge.opposite(u)
+                d_edges[edge] = dfs(v)
+                total += d_edges[edge]
 
-        # Space efficiency.
-        # print(d_matrices[k+1])
-        del d_matrices[k]
+        return total
 
-    return d_matrices[n]
+    d = {}
+    pq = MinHeapPriorityQueue()
+    pqlocator = {}
+    tree = defaultdict(list)
+    g = Graph()
+    mst = []
 
-def roadsInHackerland(n, g_matrix):
-    apsp = floyd_warshall(g_matrix)
-    # print(apsp)
-    return bin(sum(sum(e) for e in apsp) // 2)[2:]
+    for i in range(1, n + 1):
+        if i == start:
+            d[start] = 0
+        else:
+            d[i] = math.inf
+        pqlocator[i] = pq.add(d[i], (i, None))
+        g.insert_vertex(i)
+
+    for j in range(m):
+        g.insert_edge(*edges[j])
+
+    # PRIM's MST
+    while not pq.is_empty():
+        k,v = pq.remove_top()
+        u,e = v
+        del pqlocator[u]
+        if e is not None:
+            tree[e.opposite(u)].append(e)
+            mst.append(e)
+        for edge in g.incident_edges(u):
+            v = edge.opposite(u)
+            if v in pqlocator:
+                wt = edge.element()
+                if wt < d[v]:
+                    d[v] = wt
+                    pq.update(pqlocator[v], d[v], (v, edge))
+
+    d_edges = {x:0 for x in mst}
+
+    dfs(1)
+
+    results = [(d_edges[e] * (n - d_edges[e])) for e in mst]
+
+    sum = 0
+    for i in range(len(results)):
+        sum += results[i] * (2 ** mst[i].element())
+
+    return bin(sum)[2:]
 
 if __name__ == '__main__':
-    f = open('../data/johnland-001.txt')
+    f = open('../data/johnland-002.txt')
 
     nm = f.readline().split()
 
@@ -35,17 +72,11 @@ if __name__ == '__main__':
 
     m = int(nm[1])
 
-    g_matrix = [[math.inf] * n for _ in range(n)]
+    edges = []
 
     for _ in range(m):
-        u,v,w = map(int, f.readline().rstrip().split())
-        w1 = min(2 ** w, g_matrix[u-1][v-1])
-        g_matrix[u-1][v-1] = w1
-        g_matrix[v-1][u-1] = w1
+        edges.append([int(x) for x in f.readline().split()])
 
-    for i in range(n):
-        g_matrix[i][i] = 0
-
-    result = roadsInHackerland(n, g_matrix)
+    result = roadsInHackerland(n, edges)
 
     print(result)
