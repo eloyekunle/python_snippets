@@ -8,25 +8,19 @@ import sys
 
 # Complete the maxSubarray function below.
 def maxSubarray(arr):
-    max_subseq_sum = None
-    max_subarr_sum = None
-
     if max(arr) <= 0:
         max_subarr_sum = max_subseq_sum = max(arr)
     elif min(arr) >= 0:
         max_subarr_sum = max_subseq_sum = sum(arr)
     else:
         max_subarr_sum = max_subarr_ending_here = arr[0]
-        max_subseq_sum = max_subseq_ending_here = 0
+        max_subseq_sum = max(arr[0], 0)
 
         for i in range(1, len(arr)):
             el = arr[i]
             max_subarr_ending_here = max(el, max_subarr_ending_here + el)
             max_subarr_sum = max(max_subarr_sum, max_subarr_ending_here)
-
-        for el in arr:
-            max_subseq_ending_here = max(el, 0)
-            max_subseq_sum += max_subseq_ending_here
+            max_subseq_sum += max(el, 0)
 
     return [max_subarr_sum, max_subseq_sum]
 
