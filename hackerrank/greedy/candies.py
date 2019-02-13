@@ -8,25 +8,20 @@ import sys
 
 # Complete the candies function below.
 def candies(n, arr):
-  candies = [None] * n
-  candies[0] = 1
-  
-  for i in range(1, len(arr)):
-    if arr[i] >= arr[i-1]:
-      candies[i] = candies[i-1] + 1
-    else:
-      candies[i] = 1
+    candies = [None] * n
+    candies[0] = 1
 
-  cur_max = 1
-  for i in reversed(range(0, len(arr))):
-    if arr[i - 1] >= arr[i] and cur_max < candies[i]:
-      candies[i] = cur_max
-      cur_max += 1
-    else:
-      candies[i] = 1
+    for i in range(1, len(arr)):
+        if arr[i] > arr[i-1]:
+            candies[i] = candies[i-1] + 1
+        else:
+            candies[i] = 1
 
-  print(candies)
-  return sum(candies)
+    for i in reversed(range(0, len(arr) - 1)):
+        if arr[i] > arr[i + 1] and candies[i] <= candies[i + 1]:
+            candies[i] = candies[i+1] + 1
+
+    return sum(candies)
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
