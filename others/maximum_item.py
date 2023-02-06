@@ -1,5 +1,6 @@
 nums = list(map(int, input("Enter numbers, separated by space\n").split()))
 
+
 def find_max(array):
     max_num = 0
     for num in nums:
@@ -9,5 +10,6 @@ def find_max(array):
 
     return max_num
 
+
 maximum = find_max(nums)
-print ("Max is:", maximum)
+print("Max is:", maximum)

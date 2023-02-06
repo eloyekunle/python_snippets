@@ -7,10 +7,10 @@ def binary_search(search_key, search_list):
         middle_element = i + (j - i) // 2
         if search_key > search_list[middle_element]:
             i = middle_element + 1
-            print(search_list[i:j+1])
+            print(search_list[i : j + 1])
         else:
             j = middle_element
-            print(search_list[i:j+1])
+            print(search_list[i : j + 1])
 
     if search_list[i] == search_key:
         return i
@@ -32,10 +32,10 @@ def smart_binary_search(search_key, search_list):
             break
         elif search_key > search_list[middle_element]:
             i = middle_element + 1
-            print(search_list[i:j+1])
+            print(search_list[i : j + 1])
         else:
             j = middle_element
-            print(search_list[i:j+1])
+            print(search_list[i : j + 1])
 
     if search_list[i] == search_key:
         return i

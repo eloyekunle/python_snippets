@@ -8,22 +8,22 @@ def fourary_search(key, numbers):
     j = len(numbers) - 1
     while i < j - 1:
         lo = i + (j - i) // 4
-        mi = i + (j - i) // 2   # Same as i + 2 * (j - i) // 4 since 2/4 = 1/2
+        mi = i + (j - i) // 2  # Same as i + 2 * (j - i) // 4 since 2/4 = 1/2
         hi = i + 3 * (j - i) // 4
         if key > numbers[hi]:
             i = hi + 1
-            print(numbers[i:j + 1])
+            print(numbers[i : j + 1])
         elif key > numbers[mi]:
             i = mi + 1
             j = hi
-            print(numbers[i:j + 1])
+            print(numbers[i : j + 1])
         elif key > numbers[lo]:
             i = lo + 1
             j = mi
-            print(numbers[i:j + 1])
+            print(numbers[i : j + 1])
         else:
             j = lo
-            print(numbers[i:j + 1])
+            print(numbers[i : j + 1])
 
     if key == numbers[i]:
         location = i
@@ -35,7 +35,9 @@ def fourary_search(key, numbers):
     return location
 
 
-search_list = list(map(int, input("Enter sorted numbers, separated by space: ").split()))
+search_list = list(
+    map(int, input("Enter sorted numbers, separated by space: ").split())
+)
 search_key = int(input("Enter number to search for: "))
 index = fourary_search(search_key, search_list)
 message = "Index = " + str(index) if index >= 0 else "Item not found"

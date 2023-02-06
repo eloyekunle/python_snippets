@@ -13,6 +13,8 @@ def largest_difference_in_elements(elements):
     return difference
 
 
-numbers = list(map(int, input("Enter the list of numbers, separated by a space: ").split()))
+numbers = list(
+    map(int, input("Enter the list of numbers, separated by a space: ").split())
+)
 diff = largest_difference_in_elements(numbers)
 print("The largest difference is:", diff)

@@ -4,5 +4,6 @@ def minmax(x):
     largest = x[-1]
     return (smallest, largest)
 
+
 items = input()
 print(minmax(items))

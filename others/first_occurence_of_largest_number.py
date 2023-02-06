@@ -15,4 +15,9 @@ def first_occurence(numbers):
 
 nums = list(map(int, input("Enter space separated integers: ").split()))
 first_occurence_in_sequence = first_occurence(nums)
-print("The first occurence of", first_occurence_in_sequence[0], "is index", first_occurence_in_sequence[1])
+print(
+    "The first occurence of",
+    first_occurence_in_sequence[0],
+    "is index",
+    first_occurence_in_sequence[1],
+)

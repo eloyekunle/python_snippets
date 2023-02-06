@@ -1,12 +1,14 @@
 from typing import Set
+
+
 class Graph:
     class Edge:
-        __slots__ = '_origin', '_destination', '_element'
+        __slots__ = "_origin", "_destination", "_element"
 
         def __init__(self, u, v, x):
             self._origin = u
             self._destination = v
-            self._element = x   # sometimes acts as weight for weighted graphs
+            self._element = x  # sometimes acts as weight for weighted graphs
 
         def endpoints(self):
             return self._origin, self._destination  # Order matters yo!

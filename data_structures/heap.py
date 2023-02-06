@@ -1,6 +1,6 @@
 class HeapPriorityQueueBase:
     class Locator:
-        __slots__ = '_key', '_value', '_index'
+        __slots__ = "_key", "_value", "_index"
 
         def __init__(self, k, v, j):
             self._key = k
@@ -11,10 +11,10 @@ class HeapPriorityQueueBase:
             return self._key < other._key
 
     def _left(self, j):
-        return 2*j + 1
+        return 2 * j + 1
 
     def _right(self, j):
-        return 2*j + 2
+        return 2 * j + 2
 
     def _has_right(self, j):
         return self._right(j) < len(self)
@@ -31,9 +31,9 @@ class HeapPriorityQueueBase:
         self._data[m]._index = m
 
     def _bubble(self, j):
-        raise NotImplementedError('Implement, Yo!')
+        raise NotImplementedError("Implement, Yo!")
 
-    __slots__ = '_data', '_kv'
+    __slots__ = "_data", "_kv"
 
     def __init__(self, kv=True):
         self._data = []
@@ -45,10 +45,10 @@ class HeapPriorityQueueBase:
     def is_empty(self):
         return len(self) == 0
 
-    def remove(self, loc : Locator):
+    def remove(self, loc: Locator):
         j = loc._index
         if not (0 <= j < len(self) and self._data[j] == loc):
-            raise ValueError('Invalid Locator')
+            raise ValueError("Invalid Locator")
         if j == len(self) - 1:
             self._data.pop()
         else:
@@ -59,10 +59,10 @@ class HeapPriorityQueueBase:
             return loc._key
         return loc._key, loc._value
 
-    def update(self, loc : Locator, newkey, newvalue=None):
+    def update(self, loc: Locator, newkey, newvalue=None):
         j = loc._index
         if not (0 <= j < len(self) and self._data[j] == loc):
-            raise ValueError('Invalid Locator')
+            raise ValueError("Invalid Locator")
         self._data[j]._key = newkey
         if newvalue is not None:
             self._data[j]._value = newvalue
@@ -76,7 +76,7 @@ class HeapPriorityQueueBase:
 
     def top_loc(self):
         if self.is_empty():
-            raise IndexError('PQ is empty.')
+            raise IndexError("PQ is empty.")
         return self._data[0]
 
     def top(self):
@@ -87,13 +87,14 @@ class HeapPriorityQueueBase:
 
     def remove_top(self):
         if self.is_empty():
-            raise IndexError('PQ is empty.')
+            raise IndexError("PQ is empty.")
         self._swap(0, len(self) - 1)
         item = self._data.pop()
         self._bubble(0)
         if not self._kv:
             return item._key
         return item._key, item._value
+
 
 class MinHeapPriorityQueue(HeapPriorityQueueBase):
     def _upheap(self, j):
@@ -119,6 +120,7 @@ class MinHeapPriorityQueue(HeapPriorityQueueBase):
             self._upheap(j)
         else:
             self._downheap(j)
+
 
 class MaxHeapPriorityQueue(HeapPriorityQueueBase):
     def _upheap(self, j):

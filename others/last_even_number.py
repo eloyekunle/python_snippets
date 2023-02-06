@@ -11,7 +11,9 @@ def last_even_number(numbers):
     return index
 
 
-nums = list(map(int, input("Enter a sequence of numbers, separated by space: ").split()))
+nums = list(
+    map(int, input("Enter a sequence of numbers, separated by space: ").split())
+)
 last_even = last_even_number(nums)
 if last_even:
     print("The last even number is", last_even[0], "at index", last_even[1])

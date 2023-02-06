@@ -1,6 +1,6 @@
 class Graph:
     class Vertex:
-        __slots__ = '_element'
+        __slots__ = "_element"
 
         def __init__(self, x):
             self._element = x
@@ -15,7 +15,7 @@ class Graph:
             return str(self._element)
 
     class Edge:
-        __slots__ = '_origin', '_destination', '_element'
+        __slots__ = "_origin", "_destination", "_element"
 
         def __init__(self, u, v, x):
             self._origin = u
@@ -27,7 +27,7 @@ class Graph:
 
         def opposite(self, v):
             if not isinstance(v, Graph.Vertex):
-                raise TypeError('v must be a Vertex')
+                raise TypeError("v must be a Vertex")
             return self._destination if v == self._origin else self._origin
 
         def element(self):
@@ -37,7 +37,9 @@ class Graph:
             return hash((self._origin, self._destination))
 
         def __str__(self):
-            return '({0},{1},{2})'.format(self._origin, self._destination, self._element)
+            return "({0},{1},{2})".format(
+                self._origin, self._destination, self._element
+            )
 
     def __init__(self, directed=False):
         self._outgoing = {}
@@ -45,9 +47,9 @@ class Graph:
 
     def _validate_vertex(self, v):
         if not isinstance(v, self.Vertex):
-            raise TypeError('Vertex expected')
+            raise TypeError("Vertex expected")
         if v not in self._outgoing:
-            raise ValueError('Vertex does not belong to this graph.')
+            raise ValueError("Vertex does not belong to this graph.")
 
     def is_directed(self):
         return self._incoming is not self._outgoing  # directed if maps are distinct
@@ -99,7 +101,7 @@ class Graph:
 
     def insert_edge(self, u, v, x=None):
         if self.get_edge(u, v) is not None:  # includes error checking
-            raise ValueError('u and v are already adjacent')
+            raise ValueError("u and v are already adjacent")
         e = self.Edge(u, v, x)
         self._outgoing[u][v] = e
         self._incoming[v][u] = e

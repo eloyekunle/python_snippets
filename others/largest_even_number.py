@@ -12,6 +12,8 @@ def largest_even_number(numbers):
     return largest_even
 
 
-nums = list(map(int, input("Enter a sequence of numbers, separated by a space: ").split()))
+nums = list(
+    map(int, input("Enter a sequence of numbers, separated by a space: ").split())
+)
 largest_ev = largest_even_number(nums)
 print(largest_ev)

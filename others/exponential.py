@@ -10,11 +10,13 @@ def exponential(num, exponent):
     if exponent == 0:
         return 1
     if exponent < 0:
-        return 1 / num      # Returns 1/x^n
+        return 1 / num  # Returns 1/x^n
 
     return num
 
 
-number = list(map(int, input("Enter a number and the exponent, space separated: ").split()))
+number = list(
+    map(int, input("Enter a number and the exponent, space separated: ").split())
+)
 exponent = exponential(number[0], number[1])
 print(exponent)

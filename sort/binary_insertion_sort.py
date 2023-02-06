@@ -7,7 +7,7 @@ def binary_insertion_sort(numbers):
     for i in range(1, length):
         j = 0
         k = i
-        key = numbers[i]        # Here's our key for now
+        key = numbers[i]  # Here's our key for now
         # print("Trying to insert", numbers[i])
         while j < k:
             mid = (j + k) // 2
@@ -25,7 +25,7 @@ def binary_insertion_sort(numbers):
 
 
 nums = list(map(int, input("Enter the space-separated integers: ").split()))
-# with open('/home/playmice/MyCode/Python/python_snippets/data/8Kints.txt') as f:
+# with open('/home/playmice/MyCode/Python/python_snippets/hackerrank/data/8Kints.txt') as f:
 #     nums = [int(i) for i in f]
 
 binary_insertion_sort(nums)

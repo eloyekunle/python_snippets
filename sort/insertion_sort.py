@@ -37,7 +37,7 @@ def smart_insertion_sort(nums_array):
 
 
 nums = list(map(int, input("Enter numbers, separated by space: ").split()))
-# with open('/home/playmice/MyCode/Python/python_snippets/data/8Kints.txt') as f:
+# with open('/home/playmice/MyCode/Python/python_snippets/hackerrank/data/8Kints.txt') as f:
 #     nums = [int(i) for i in f]
 
 smart_insertion_sort(nums)

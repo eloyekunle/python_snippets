@@ -17,7 +17,9 @@ use_default = input("Use default denominations [25, 10, 5, 1] (y/n): ")
 if use_default == "y":
     calculate_change(amount)
 elif use_default == "n":
-    denoms = list(map(int, input("Enter the denominations, separated by spaces: ").split()))
+    denoms = list(
+        map(int, input("Enter the denominations, separated by spaces: ").split())
+    )
     calculate_change(amount, denoms)
 else:
     print("All you needed to do was enter a 'y' or 'n'. Now I'm angry, and I'm dead.")

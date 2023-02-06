@@ -4,7 +4,7 @@ def solution(A, B):
     pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     assert solution([1, 2, 4, 3], [1, 3, 2, 3]) == 2
     assert solution([3, 2, 1, 6, 5], [4, 2, 1, 3, 3]) == 3
     assert solution([1, 2], [1, 2]) == 3

@@ -5,8 +5,8 @@ def bubble_sort(nums_array):
         print(nums_array)
         print("\n")
         for j in range(array_length - i):
-            if nums_array[j] > nums_array[j+1]:
-                nums_array[j], nums_array[j+1] = nums_array[j+1], nums_array[j]
+            if nums_array[j] > nums_array[j + 1]:
+                nums_array[j], nums_array[j + 1] = nums_array[j + 1], nums_array[j]
                 print(i, j, nums_array)
 
 
@@ -21,10 +21,14 @@ def smart_bubble_sort(nums_array):
         print("\n")
         swap = False
         for j in range(length - i):
-            if nums_array[j] > nums_array[j+1]:
-                nums_array[j], nums_array[j+1] = nums_array[j+1], nums_array[j]     # Swap
+            if nums_array[j] > nums_array[j + 1]:
+                nums_array[j], nums_array[j + 1] = (
+                    nums_array[j + 1],
+                    nums_array[j],
+                )  # Swap
                 swap = True
                 print(i, j, nums_array)
+
 
 nums = list(map(int, input("Enter numbers, separated by space: ").split()))
 smart_bubble_sort(nums)

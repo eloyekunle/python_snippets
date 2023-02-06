@@ -1,5 +1,6 @@
 def is_multiple(n, m):
-    return(True if m%n == 0 else False)
+    return True if m % n == 0 else False
+
 
 pieces = input().split()
 x = int(pieces[0])

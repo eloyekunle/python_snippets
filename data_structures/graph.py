@@ -19,13 +19,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 class Graph:
     """Representation of a simple graph using an adjacency map."""
 
     # ------------------------- nested Vertex class -------------------------
     class Vertex:
         """Lightweight vertex structure for a graph."""
-        __slots__ = '_element'
+
+        __slots__ = "_element"
 
         def __init__(self, x):
             """Do not call constructor directly. Use Graph's insert_vertex(x)."""
@@ -44,7 +46,8 @@ class Graph:
     # ------------------------- nested Edge class -------------------------
     class Edge:
         """Lightweight edge structure for a graph."""
-        __slots__ = '_origin', '_destination', '_element'
+
+        __slots__ = "_origin", "_destination", "_element"
 
         def __init__(self, u, v, x):
             """Do not call constructor directly. Use Graph's insert_edge(u,v,x)."""
@@ -59,9 +62,9 @@ class Graph:
         def opposite(self, v):
             """Return the vertex that is opposite v on this edge."""
             if not isinstance(v, Graph.Vertex):
-                raise TypeError('v must be a Vertex')
+                raise TypeError("v must be a Vertex")
             return self._destination if v == self._origin else self._origin
-            raise ValueError('v not incident to edge')
+            raise ValueError("v not incident to edge")
 
         def element(self):
             """Return element associated with this edge."""
@@ -71,7 +74,9 @@ class Graph:
             return hash((self._origin, self._destination))
 
         def __str__(self):
-            return '({0},{1},{2})'.format(self._origin, self._destination, self._element)
+            return "({0},{1},{2})".format(
+                self._origin, self._destination, self._element
+            )
 
     # ------------------------- Graph methods -------------------------
     def __init__(self, directed=False):
@@ -86,9 +91,9 @@ class Graph:
     def _validate_vertex(self, v):
         """Verify that v is a Vertex of this graph."""
         if not isinstance(v, self.Vertex):
-            raise TypeError('Vertex expected')
+            raise TypeError("Vertex expected")
         if v not in self._outgoing:
-            raise ValueError('Vertex does not belong to this graph.')
+            raise ValueError("Vertex does not belong to this graph.")
 
     def is_directed(self):
         """Return True if this is a directed graph; False if undirected.
@@ -158,7 +163,7 @@ class Graph:
         Raise a ValueError if u and v are already adjacent.
         """
         if self.get_edge(u, v) is not None:  # includes error checking
-            raise ValueError('u and v are already adjacent')
+            raise ValueError("u and v are already adjacent")
         e = self.Edge(u, v, x)
         self._outgoing[u][v] = e
         self._incoming[v][u] = e

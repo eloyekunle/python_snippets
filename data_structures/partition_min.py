@@ -1,12 +1,12 @@
 class Partition:
     class Position:
-        __slots__ = '_container', '_element', '_size', '_parent'
+        __slots__ = "_container", "_element", "_size", "_parent"
 
         def __init__(self, container, e):
-            self._container = container         # reference to Partition instance
+            self._container = container  # reference to Partition instance
             self._element = e
             self._size = 1
-            self._parent = self                 # convention for a group leader
+            self._parent = self  # convention for a group leader
 
         def element(self):
             return self._element
@@ -25,9 +25,9 @@ class Partition:
 
     def _validate(self, p):
         if not isinstance(p, self.Position):
-            raise TypeError('p must be proper Position type')
+            raise TypeError("p must be proper Position type")
         if p._container is not self:
-            raise ValueError('p does not belong to this container')
+            raise ValueError("p does not belong to this container")
 
     def make_group(self, e):
         position = self.Position(self, e)
@@ -37,7 +37,7 @@ class Partition:
     def find(self, p):
         self._validate(p)
         if p._parent != p:
-            p._parent = self.find(p._parent)    # overwrite p._parent after recursion
+            p._parent = self.find(p._parent)  # overwrite p._parent after recursion
         return p._parent
 
     def positions(self):
@@ -46,7 +46,7 @@ class Partition:
     def union(self, p, q):
         a = self.find(p)
         b = self.find(q)
-        if a is not b:                        # only merge if different groups
+        if a is not b:  # only merge if different groups
             if a > b:
                 b._parent = a
                 a._size += b._size

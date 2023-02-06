@@ -13,14 +13,14 @@ def ternary_search(key, numbers):
 
         if key > numbers[upper]:
             i = upper + 1
-            print(numbers[i:j + 1])
+            print(numbers[i : j + 1])
         elif key > numbers[low]:
             i = low + 1
             j = upper
-            print(numbers[i:j + 1])
+            print(numbers[i : j + 1])
         else:
             j = low
-            print(numbers[i:j + 1])
+            print(numbers[i : j + 1])
 
     if key == numbers[i]:
         location = i
@@ -32,7 +32,9 @@ def ternary_search(key, numbers):
     return location
 
 
-search_list = list(map(int, input("Enter sorted numbers, separated by space: ").split()))
+search_list = list(
+    map(int, input("Enter sorted numbers, separated by space: ").split())
+)
 search_key = int(input("Enter number to search for: "))
 index = ternary_search(search_key, search_list)
 message = "Index = " + str(index) if index >= 0 else "Item not found"

@@ -12,10 +12,10 @@ def insert_binary(key, numbers):
         middle = (i + j) // 2
         if key > numbers[middle]:
             i = middle + 1
-            print(numbers[i:j+1])
+            print(numbers[i : j + 1])
         else:
             j = middle
-            print(numbers[i:j+1])
+            print(numbers[i : j + 1])
     if key <= numbers[i]:
         location = i
         for k in range(1, length - 1):

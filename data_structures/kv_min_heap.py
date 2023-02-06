@@ -1,6 +1,6 @@
 class HeapPriorityQueue:
     class _Item:
-        __slots__ = '_key', '_value'
+        __slots__ = "_key", "_value"
 
         def __init__(self, k, v):
             self._key = k
@@ -10,10 +10,10 @@ class HeapPriorityQueue:
             return self._key < other._key
 
     def _left(self, j):
-        return 2*j + 1
+        return 2 * j + 1
 
     def _right(self, j):
-        return 2*j + 2
+        return 2 * j + 2
 
     def _has_right(self, j):
         return self._right(j) < len(self)
@@ -45,7 +45,7 @@ class HeapPriorityQueue:
     def _swap(self, n, m):
         self._data[n], self._data[m] = self._data[m], self._data[n]
 
-    __slots__ = '_data'
+    __slots__ = "_data"
 
     def __init__(self):
         self._data = []
@@ -58,13 +58,13 @@ class HeapPriorityQueue:
 
     def min(self):
         if self.is_empty():
-            raise IndexError('PQ is empty.')
+            raise IndexError("PQ is empty.")
         min_val = self._data[0]
         return min_val._key, min_val._value
 
     def remove_min(self):
         if self.is_empty():
-            raise IndexError('PQ is empty.')
+            raise IndexError("PQ is empty.")
         self._swap(0, len(self) - 1)
         item = self._data.pop()
         self._downheap(0)
@@ -75,9 +75,10 @@ class HeapPriorityQueue:
         self._data.append(item)
         self._upheap(len(self) - 1)
 
+
 class AdaptableHeapPriorityQueue(HeapPriorityQueue):
     class Locator(HeapPriorityQueue._Item):
-        __slots__ = '_index'
+        __slots__ = "_index"
 
         def __init__(self, k, v, j):
             super().__init__(k, v)
@@ -100,18 +101,18 @@ class AdaptableHeapPriorityQueue(HeapPriorityQueue):
         self._upheap(len(self._data) - 1)
         return token
 
-    def update(self, loc : Locator, newkey, newvalue):
+    def update(self, loc: Locator, newkey, newvalue):
         j = loc._index
         if not (0 <= j < len(self) and self._data[j] == loc):
-            raise ValueError('Invalid Locator')
+            raise ValueError("Invalid Locator")
         self._data[j]._key = newkey
         self._data[j]._value = newvalue
         self._bubble(j)
 
-    def remove(self, loc : Locator):
+    def remove(self, loc: Locator):
         j = loc._index
         if not (0 <= j < len(self) and self._data[j] == loc):
-            raise ValueError('Invalid Locator')
+            raise ValueError("Invalid Locator")
         if j == len(self) - 1:
             self._data.pop()
         else:
